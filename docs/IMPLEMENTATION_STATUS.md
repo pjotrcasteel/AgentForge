@@ -6,7 +6,7 @@
 - Added `.github/workflows/pages.yml` for GitHub Pages from the `docs/` directory on `main`; retained the existing .NET 10 CI workflow.
 - The public [`pjotrcasteel/AgentForge`](https://github.com/pjotrcasteel/AgentForge) repository now exists, with the complete v1.0-preview source on `main` (initial source commit `c745965`). GitHub verified the remote README, source project, tests and Pages workflow.
 - The initial Pages workflow failed because Pages has not yet been enabled under repository **Settings → Pages**. Choose **GitHub Actions** there, then rerun the Pages workflow or push a documentation update. The website is **not yet claimed to be live**.
-- A GitHub Actions `.NET 10` validation run was triggered by the source publication; its result must be checked separately before calling the newly published revision CI-verified.
+- The first Windows GitHub Actions run confirmed a zero-warning Release build but exposed 29 SQLite-backed test cleanup failures: pooled connections retained local database handles. Commit `920bbc0` disabled pooling for both short-lived telemetry stores. The follow-up [Windows CI run](https://github.com/pjotrcasteel/AgentForge/actions/runs/41461118627) **passed** with a zero-warning Release build and **183/183 MSTest tests**. This verifies the published source; real provider-account acceptance and forecast calibration are still outstanding.
 - This documentation/website addition has not been rebuilt or retested in the current environment, which lacks the .NET 10 SDK. The 17-project/183-test figures below refer to the previously verified v1.0 source release.
 
 ## Provider-aware budgeting roadmap (v0.6–v1.1)
