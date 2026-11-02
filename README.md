@@ -2,7 +2,7 @@
 
 A **read-only, provider-neutral .NET 10 token-budget preflight** for AI coding plans and agent workflows.
 
-**Development status (v1.2 preview, November 2, 2026):** an easy-to-use `agentforge` .NET 10 tool, backed by provider-aware forecasting, account-isolated usage reconciliation, conservative calibration diagnostics, and a consent-gated Copilot SDK account probe. VS Code Copilot's custom agent and MCP integration passed installed-tool protocol verification in Windows CI. v1.2 adds `agentforge doctor`, a read-only workspace/model/PATH/credit-preference health check. The [Windows CI run](https://github.com/pjotrcasteel/AgentForge/actions/runs/41513982439) passed **17 Release projects, zero warnings, 200 MSTest cases, the packaged MCP invocation and the installed-tool doctor smoke test**. First use inside a signed-in VS Code Copilot session and authenticated account billing verification remain pending. See [VS Code Copilot integration](docs/VSCODE_COPILOT.md), [v1.0 release notes](docs/RELEASE_v1.0.md), [provider-aware billing](docs/PROVIDER_BUDGETS.md), and [session reconciliation](docs/SESSION_RECONCILIATION.md). Forecasts remain advisory: no real completed-agent calibration dataset is available.
+**Development status (v1.3 preview, November 2, 2026):** an easy-to-use `agentforge` .NET 10 tool, backed by provider-aware forecasting, account-isolated usage reconciliation, conservative calibration diagnostics, and a consent-gated Copilot SDK account probe. VS Code Copilot's custom agent and MCP integration passed installed-tool protocol verification in Windows CI. v1.2 adds `agentforge doctor`, a read-only workspace/model/PATH/credit-preference health check. The [Windows CI run](https://github.com/pjotrcasteel/AgentForge/actions/runs/41513982439) passed **17 Release projects, zero warnings, 200 MSTest cases, the packaged MCP invocation and the installed-tool doctor smoke test**. v1.3 adds `agentforge copilot status`: an explicitly consented SDK pricing/quota check using previously saved preferences, with original credit-observation timestamps preserved. First use inside a signed-in VS Code Copilot session and authenticated account billing verification remain pending. See [VS Code Copilot integration](docs/VSCODE_COPILOT.md), [v1.0 release notes](docs/RELEASE_v1.0.md), [provider-aware billing](docs/PROVIDER_BUDGETS.md), and [session reconciliation](docs/SESSION_RECONCILIATION.md). Forecasts remain advisory: no real completed-agent calibration dataset is available.
 
 ## Quick start — one task, no long argument list
 
@@ -24,10 +24,10 @@ Or use a Markdown milestone plan (no ten-option invocation):
 dotnet run --project .\src\TokenBudget.Cli -- preflight .\examples\wyrmforge-g6-budget-plan.md
 ```
 
-For the shortest commands, install the v1.0 preview NuGet **tool package supplied with the release** from the directory containing its `.nupkg` (not yet published to NuGet.org):
+For the shortest commands, install the v1.3 preview NuGet **tool package supplied with the release** from the directory containing its `.nupkg` (not yet published to NuGet.org):
 
 ```powershell
-dotnet tool install --global --add-source .\downloads AgentForge.TokenBudget.Cli --version 1.2.0-preview.1
+dotnet tool install --global --add-source .\downloads AgentForge.TokenBudget.Cli --version 1.3.0-preview.1
 agentforge setup
 agentforge "Refactor the lighting engine"
 agentforge preflight .\examples\wyrmforge-g6-budget-plan.md
@@ -36,7 +36,7 @@ agentforge
 
 To use the same deterministic preflight inside **GitHub Copilot Chat in VS Code**, open the target project folder and run `agentforge vscode init` once. Select **AgentForge** from Copilot's agent picker and enter a single task like `Refactor the lighting engine`. This installs a read-only MCP-backed custom agent; it never auto-executes the task. See the [VS Code setup guide](docs/VSCODE_COPILOT.md) for installing the tool and verifying its first call.
 
-The final command prompts you for a task interactively. `agentforge --help` lists advanced capabilities. You can also run `agentforge check "..."` as an alias for `preflight`. Installation requires a .NET 10 runtime; the packaged tool includes the Copilot SDK's large multi-platform runtime assets, so its download is substantially larger than the source-only project.
+Run `agentforge doctor` to check local VS Code readiness. When you want to inspect current SDK billing signals, run `agentforge copilot status` and confirm the live read-only query. Your configured account label is not proof of the SDK identity, and any saved credits retain their original observation date.\n\nThe final command prompts you for a task interactively. `agentforge --help` lists advanced capabilities. You can also run `agentforge check "..."` as an alias for `preflight`. Installation requires a .NET 10 runtime; the packaged tool includes the Copilot SDK's large multi-platform runtime assets, so its download is substantially larger than the source-only project.
 
 ## GitHub repository and Pages
 
