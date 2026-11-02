@@ -28,6 +28,7 @@ internal static class CliApplication
             "preflight" or "check" => QuickPreflightCommand.RunAsync(args),
             "analyze" => AnalyzeCommand.RunAsync(args),
             "budget" => ProviderBudgetCommand.RunAsync(args),
+            "copilot" => CopilotStatusCommand.RunAsync(args),
             "copilot-probe" => CopilotProbeCommand.RunAsync(args),
             "ingest-provider-session" => ProviderSessionCommand.RunAsync(args, ingestion: true),
             "provider-history" => ProviderSessionCommand.RunAsync(args, ingestion: false),
@@ -63,7 +64,7 @@ internal static class CliApplication
     private static void PrintHelp()
     {
         Console.WriteLine("""
-            AgentForge TokenBudget v1.2 preview - one-command AI task preflight
+            AgentForge TokenBudget v1.3 preview - one-command AI task preflight
 
             Commands:
               agentforge                               Enter a prompt interactively
@@ -71,6 +72,7 @@ internal static class CliApplication
               agentforge setup                         Configure defaults once; no credentials stored
               agentforge vscode init                   Add Copilot agent and MCP server to this workspace
               agentforge doctor                        Check VS Code Copilot readiness without changing files
+              agentforge copilot status                Opt-in live SDK pricing and quota lookup; uses saved settings
               agentforge vscode doctor                 Same check from this workspace
               agentforge preflight "Refactor the lighting engine"
               agentforge preflight <plan.md>           Read an existing prompt file

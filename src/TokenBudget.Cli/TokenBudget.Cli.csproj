@@ -4,7 +4,7 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>agentforge</ToolCommandName>
     <PackageId>AgentForge.TokenBudget.Cli</PackageId>
-    <Version>1.2.0-preview.1</Version>
+    <Version>1.3.0-preview.1</Version>
     <Authors>AgentForge</Authors>
     <Description>Provider-aware AI engineering prompt and token budget preflight.</Description>
     <!-- Copilot SDK includes dot-prefixed runtime metadata required by its CLI bundle. -->
