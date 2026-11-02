@@ -112,6 +112,33 @@ def main() -> None:
         assert not settings.exists(), "Doctor must never save configuration"
         print("CLI smoke passed: read-only doctor reports missing setup.")
 
+        # Even when a model has been configured, a refusal must never start
+        # the Copilot SDK or alter the user's saved preferences.
+        saved_preferences = {
+            "provider": "GitHubCopilot",
+            "modelId": "chosen-model",
+            "accountId": "personal",
+            "monthlyAllowance": 30000,
+            "alreadyUsed": 9000,
+            "balanceObservedAt": "2026-09-01T00:00:00+00:00",
+        }
+        original_preferences = json.dumps(saved_preferences)
+        settings.write_text(original_preferences, encoding="utf-8")
+        declined = subprocess.run(
+            [str(executable), "copilot", "status"],
+            cwd=workspace,
+            env=environment,
+            input="no\n",
+            capture_output=True,
+            text=True,
+            timeout=15,
+            check=False,
+        )
+        assert declined.returncode == 2, declined.stdout + declined.stderr
+        assert "No SDK call made" in declined.stdout, declined.stdout
+        assert settings.read_text(encoding="utf-8") == original_preferences
+        print("CLI smoke passed: Copilot status refusal makes no SDK call.")
+
 
 if __name__ == "__main__":
     main()
