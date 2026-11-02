@@ -1,4 +1,4 @@
-# AgentForge in VS Code Copilot Chat (v1.1 preview)
+# AgentForge in VS Code Copilot Chat (v1.2 preview)
 
 AgentForge integrates with GitHub Copilot Chat using a **custom agent and a local .NET MCP server**. This is the current supported VS Code integration mechanism; the older Chat Participant extension API is deprecated for the Copilot harness.
 
@@ -16,7 +16,7 @@ Requirements: Visual Studio Code with GitHub Copilot Chat, .NET 10 installed, an
 2. In PowerShell, from the folder containing `downloads`, install or update the CLI:
 
 ```powershell
-dotnet tool install --global --add-source .\downloads AgentForge.TokenBudget.Cli --version 1.1.0-preview.1
+dotnet tool install --global --add-source .\downloads AgentForge.TokenBudget.Cli --version 1.2.0-preview.1
 # If a prior version is already installed, use 'dotnet tool update' with the same options instead.
 agentforge setup
 ```
@@ -26,6 +26,8 @@ agentforge setup
 ```powershell
 agentforge vscode init
 ```
+
+Run `agentforge doctor` in the same terminal to check your agent files, MCP server configuration, executable on PATH, and selected provider/model. It is read-only and works offline. Missing credit balances remain **unknown** and never prevent a token-only preflight.
 
 The installer creates `.github/agents/agentforge.agent.md` and `.vscode/mcp.json` in **that workspace only**. It refuses to overwrite conflicting files. If `.vscode/mcp.json` already has other servers, it keeps that file unchanged and uses a separate portable `.mcp.json` when available. No credentials or prompt history are written to either file.
 

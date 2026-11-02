@@ -22,6 +22,7 @@ internal static class CliApplication
         return args[0].ToLowerInvariant() switch
         {
             "setup" => SetupCommand.RunAsync(),
+            "doctor" when args.Length == 1 => VsCodeDoctorCommand.RunAsync(),
             "mcp" when args.Length == 1 => AgentForgeMcpServer.RunAsync(),
             "vscode" => VsCodeIntegrationCommand.RunAsync(args),
             "preflight" or "check" => QuickPreflightCommand.RunAsync(args),
@@ -62,13 +63,15 @@ internal static class CliApplication
     private static void PrintHelp()
     {
         Console.WriteLine("""
-            AgentForge TokenBudget v1.1 preview - one-command AI task preflight
+            AgentForge TokenBudget v1.2 preview - one-command AI task preflight
 
             Commands:
               agentforge                               Enter a prompt interactively
               agentforge "Refactor the lighting engine"  Assess a task immediately
               agentforge setup                         Configure defaults once; no credentials stored
               agentforge vscode init                   Add Copilot agent and MCP server to this workspace
+              agentforge doctor                        Check VS Code Copilot readiness without changing files
+              agentforge vscode doctor                 Same check from this workspace
               agentforge preflight "Refactor the lighting engine"
               agentforge preflight <plan.md>           Read an existing prompt file
               agentforge preflight                     Enter a prompt interactively

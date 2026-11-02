@@ -1,4 +1,10 @@
-# Implementation status — 2026-11-02 (v1.1 preview verified in Windows CI)
+# Implementation status — 2026-11-02 (v1.2 preview in development; v1.1 verified in Windows CI)
+
+## v1.2 VS Code onboarding diagnostics — 2026-11-02
+
+- Introduced `agentforge doctor` and `agentforge vscode doctor`, a read-only local health check for the Copilot custom agent, MCP JSON/JSONC registration, CLI on PATH, selected model, and user-reported Copilot credit freshness.
+- No prompt upload, SDK session, provider calls, configuration writes, or live account billing assumptions occur during diagnostics.
+- Added offline MSTest scenarios for valid/missing/conflicting configuration, portable MCP setup, malformed JSON, unknown balances, stale observations and no-write behavior. CI verification pending.
 
 ## v1.1 VS Code Copilot integration — 2026-11-02
 
@@ -32,6 +38,7 @@
 | v1.0 Easy one-task CLI | P0 | `agentforge setup` once, then `agentforge "task"` or `agentforge preflight plan.md`; .NET tool install; preserve advanced CLI and consent/unknown states | Implemented; offline tool smoke verified |
 | v1.1 VS Code Copilot preflight | P0 | Official custom agent and MCP server via `agentforge mcp`; one-command workspace setup; strict no-execution tool boundary | Implemented; installed MCP protocol verified in CI; VS Code user acceptance pending |
 | v1.1 Ease-of-install and actual account acceptance | P1 | Packaged .NET tool from CI; authenticated Copilot principal verification; safe pricing and quota reset checks | Tool packaged and installed in CI; account approval required |
+| v1.2 Onboarding diagnostics | P0 | Single-command readiness check with actionable fixes, no secrets or provider calls | Implemented in source; CI verification pending |
 | v0.10 Controlled calibration | P2 | Real-run quality checks and separately approved statistical adjustment, only after authenticated provider acceptance | Planned; live evidence required |
 
 The v0.5 baseline was reverified before edits on 2026-11-02: **14/14 projects built in Release, zero warnings/errors, 69/69 MSTest cases passed**. No live Copilot account or SDK credentials have been supplied. Token usage, model prices, provider account quota, USD charges, and AI credits are distinct quantities; missing quota data does not mean zero balance. An optional AI reviewer cannot override deterministic policy or consent gates.
