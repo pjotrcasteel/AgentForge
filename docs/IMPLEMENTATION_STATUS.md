@@ -1,11 +1,18 @@
-# Implementation status — 2026-11-02 (v1.0 preview verified locally)
+# Implementation status — 2026-11-02 (v1.1 preview verified in Windows CI)
+
+## v1.1 VS Code Copilot integration — 2026-11-02
+
+- [PR #1](https://github.com/pjotrcasteel/AgentForge/pull/1) merged a one-prompt, read-only `agentforge` MCP server, Copilot custom agent, and `agentforge vscode init` workspace setup.
+- [PR #2](https://github.com/pjotrcasteel/AgentForge/pull/2) aligned the custom agent with the SDK's actual `preflight_task` MCP tool name and added a packaged-tool protocol smoke test.
+- The [Windows CI run](https://github.com/pjotrcasteel/AgentForge/actions/runs/41470483507) passed **17/17 .NET 10 Release projects, zero warnings, 191/191 MSTest cases**, `.nupkg` packaging, local tool installation, and MCP `initialize`, `tools/list`, and `tools/call` with a real forecast.
+- The real VS Code Copilot Chat user-session acceptance test is still pending. Authenticated account-specific Copilot pricing and credit quota verification also remain pending; the offline estimates are uncalibrated.
 
 ## GitHub publication — 2026-11-02
 
 - Added a static AgentForge landing page at `docs/index.html`, with explicit uncalibrated-forecast and billing-unknown notices.
 - Added `.github/workflows/pages.yml` for GitHub Pages from the `docs/` directory on `main`; retained the existing .NET 10 CI workflow.
 - The public [`pjotrcasteel/AgentForge`](https://github.com/pjotrcasteel/AgentForge) repository now exists, with the complete v1.0-preview source on `main` (initial source commit `c745965`). GitHub verified the remote README, source project, tests and Pages workflow.
-- The initial Pages workflow failed because Pages has not yet been enabled under repository **Settings → Pages**. Choose **GitHub Actions** there, then rerun the Pages workflow or push a documentation update. The website is **not yet claimed to be live**.
+- The initial Pages workflow required enabling **GitHub Actions** under repository **Settings → Pages**. That was completed later; the site is now live at [AgentForge on GitHub Pages](https://pjotrcasteel.github.io/AgentForge/).
 - The first Windows GitHub Actions run confirmed a zero-warning Release build but exposed 29 SQLite-backed test cleanup failures: pooled connections retained local database handles. Commit `920bbc0` disabled pooling for both short-lived telemetry stores. The follow-up [Windows CI run](https://github.com/pjotrcasteel/AgentForge/actions/runs/41461118627) **passed** with a zero-warning Release build and **183/183 MSTest tests**. This verifies the published source; real provider-account acceptance and forecast calibration are still outstanding.
 - This documentation/website addition has not been rebuilt or retested in the current environment, which lacks the .NET 10 SDK. The 17-project/183-test figures below refer to the previously verified v1.0 source release.
 
@@ -23,8 +30,8 @@
 | v0.8 Calibration diagnostics | P1 | Compute observed P10/P50/P90 coverage and conservative lower bound; warn on underforecast; manual review gate; preserve deterministic policy | Implemented and tested with synthetic data |
 | v0.9 Copilot account probe | P1 | Explicitly consented SDK price/quota lookup with independent partial states and user-reported credit fallback; no prompts or sessions | Implemented and tested offline; authenticated acceptance pending |
 | v1.0 Easy one-task CLI | P0 | `agentforge setup` once, then `agentforge "task"` or `agentforge preflight plan.md`; .NET tool install; preserve advanced CLI and consent/unknown states | Implemented; offline tool smoke verified |
-| v1.1 VS Code Copilot preflight | P0 | Official custom agent and MCP server via `agentforge mcp`; one-command workspace setup; strict no-execution tool boundary | Implemented in source; awaiting CI and VS Code acceptance |
-| v1.1 Ease-of-install and actual account acceptance | P1 | Packaged .NET tool from CI; authenticated Copilot principal verification; safe pricing and quota reset checks | Tool packaging in CI; account approval required |
+| v1.1 VS Code Copilot preflight | P0 | Official custom agent and MCP server via `agentforge mcp`; one-command workspace setup; strict no-execution tool boundary | Implemented; installed MCP protocol verified in CI; VS Code user acceptance pending |
+| v1.1 Ease-of-install and actual account acceptance | P1 | Packaged .NET tool from CI; authenticated Copilot principal verification; safe pricing and quota reset checks | Tool packaged and installed in CI; account approval required |
 | v0.10 Controlled calibration | P2 | Real-run quality checks and separately approved statistical adjustment, only after authenticated provider acceptance | Planned; live evidence required |
 
 The v0.5 baseline was reverified before edits on 2026-11-02: **14/14 projects built in Release, zero warnings/errors, 69/69 MSTest cases passed**. No live Copilot account or SDK credentials have been supplied. Token usage, model prices, provider account quota, USD charges, and AI credits are distinct quantities; missing quota data does not mean zero balance. An optional AI reviewer cannot override deterministic policy or consent gates.
