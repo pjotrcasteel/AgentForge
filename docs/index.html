@@ -102,6 +102,7 @@
     th { color: var(--muted); font-weight: 550; font-size: 13px; }
     td:last-child, th:last-child { text-align: right; }
     .status { color: var(--orange); }
+    .verified { color: var(--green); }
     .note { border-left: 3px solid var(--orange); padding: 4px 0 4px 17px; color: var(--muted); font-size: 14px; }
     .detail { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-bottom: 72px; }
     .detail strong { color: var(--text); }
@@ -132,12 +133,13 @@
         <a href="#features">Features</a>
         <a href="#example">Example</a>
         <a href="#install">Quick start</a>
+        <a href="#status-heading">Status</a>
         <a href="https://github.com/pjotrcasteel/AgentForge">Source on GitHub</a>
       </nav>
     </header>
     <main id="top">
       <section class="hero" aria-labelledby="hero-heading">
-        <span class="eyebrow">.NET 10 · Provider-aware · Offline by default</span>
+        <span class="eyebrow">v1.1 preview · VS Code Copilot integration · Offline by default</span>
         <h1 id="hero-heading">Build confidently.<br><span class="shine">Know the budget.</span></h1>
         <p class="intro">
           AgentForge examines an AI development task before you run it.
@@ -191,16 +193,17 @@ Action: define files and acceptance tests</code></pre>
         </div>
       </section>
       <section id="install" aria-labelledby="install-heading">
-        <h2 class="section-title" id="install-heading">Simple commands for everyday work.</h2>
-        <p class="subtle">With the .NET 10 SDK and source checkout, run setup once and then supply just your task.</p>
+        <h2 class="section-title" id="install-heading">One task in VS Code Copilot Chat.</h2>
+        <p class="subtle">The v1.1 preview includes a read-only Copilot custom agent backed by AgentForge's local MCP server. After installing the .NET 10 tool, configure it once in your development workspace:</p>
         <pre><code><span class="comment"># One-time settings: provider, model, optional allowance</span>
-dotnet run --project ./src/TokenBudget.Cli -- setup
+agentforge setup
 
-<span class="comment"># Your next task</span>
-dotnet run --project ./src/TokenBudget.Cli -- "Refactor the lighting engine"
+<span class="comment"># From your VS Code project folder, once per workspace</span>
+agentforge vscode init
 
-<span class="comment"># Or assess a Markdown plan</span>
-dotnet run --project ./src/TokenBudget.Cli -- preflight plan.md</code></pre>
+<span class="comment"># Then select AgentForge in Copilot Chat and simply ask:</span>
+Refactor the lighting engine</code></pre>
+        <p class="subtle">Download the packaged v1.1 tool from the <a href="https://github.com/pjotrcasteel/AgentForge/actions/runs/41470483507">successful CI run</a> and follow the <a href="https://github.com/pjotrcasteel/AgentForge/blob/main/docs/VSCODE_COPILOT.md">VS Code installation guide</a>. You can also use <code>agentforge "Your task"</code> directly from a terminal.</p>
         <div class="detail">
           <p><strong>Private by default.</strong><br><span class="subtle">The preflight does not upload prompt content, invoke a paid reviewer or execute code.</span></p>
           <p><strong>Honest about uncertainty.</strong><br><span class="subtle">Missing or stale prices and quotas remain unknown, not zero. Forecasts are not yet empirically calibrated.</span></p>
@@ -211,15 +214,18 @@ dotnet run --project ./src/TokenBudget.Cli -- preflight plan.md</code></pre>
       <section aria-labelledby="status-heading">
         <h2 class="section-title" id="status-heading">Project status</h2>
         <table>
-          <thead><tr><th>v1.0 preview verification</th><th>Result</th></tr></thead>
+          <thead><tr><th>v1.1 preview verification</th><th>Result</th></tr></thead>
           <tbody>
             <tr><td>Projects compiled in Release</td><td>17 / 17</td></tr>
-            <tr><td>MSTest cases passed</td><td>183</td></tr>
+            <tr><td>MSTest cases passed</td><td>191</td></tr>
             <tr><td>Compiler warnings</td><td>0</td></tr>
-            <tr><td>Authenticated live Copilot acceptance</td><td>Pending</td></tr>
+            <tr><td>VS Code Copilot custom agent and MCP integration</td><td class="verified">Implemented</td></tr>
+            <tr><td>Packaged .NET tool installation and MCP protocol test</td><td class="verified">Passed in CI</td></tr>
+            <tr><td>First use in a signed-in VS Code Copilot session</td><td class="status">Pending</td></tr>
+            <tr><td>Authenticated account-specific Copilot billing verification</td><td class="status">Pending</td></tr>
           </tbody>
         </table>
-        <p class="note">Figures reflect the prior verified v1.0 build. They are not claims about live provider accuracy or CI status for this website deployment.</p>
+        <p class="note">The v1.1 build, 191 tests and real MCP stdio invocation were verified on Windows GitHub Actions. A live Copilot session and authenticated billing data have not been tested; forecasts remain advisory and uncalibrated.</p>
       </section>
     </main>
     <footer>
