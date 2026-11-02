@@ -69,18 +69,18 @@ def main() -> None:
 
         available = request(2, "tools/list")
         tools = [tool["name"] for tool in available.get("tools", [])]
-        assert "PreflightTask" in tools, f"AgentForge MCP tool missing: {tools}"
+        assert "preflight_task" in tools, f"AgentForge MCP tool missing: {tools}"
 
         result = request(
             3,
             "tools/call",
-            {"name": "PreflightTask", "arguments": {"prompt": "Refactor the lighting engine"}},
+            {"name": "preflight_task", "arguments": {"prompt": "Refactor the lighting engine"}},
         )
         assert not result.get("isError"), result
         content = "\n".join(item.get("text", "") for item in result.get("content", []))
         assert "Tokens P10 / P50 / P90" in content, content
         assert "no task executed" in content, content
-        print("MCP smoke passed: initialize, tools/list, PreflightTask.")
+        print("MCP smoke passed: initialize, tools/list, preflight_task.")
     finally:
         process.terminate()
         try:
