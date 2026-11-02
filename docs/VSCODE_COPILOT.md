@@ -1,4 +1,4 @@
-# AgentForge in VS Code Copilot Chat (v1.2 preview)
+# AgentForge in VS Code Copilot Chat (v1.3 preview)
 
 AgentForge integrates with GitHub Copilot Chat using a **custom agent and a local .NET MCP server**. This is the current supported VS Code integration mechanism; the older Chat Participant extension API is deprecated for the Copilot harness.
 
@@ -16,7 +16,7 @@ Requirements: Visual Studio Code with GitHub Copilot Chat, .NET 10 installed, an
 2. In PowerShell, from the folder containing `downloads`, install or update the CLI:
 
 ```powershell
-dotnet tool install --global --add-source .\downloads AgentForge.TokenBudget.Cli --version 1.2.0-preview.1
+dotnet tool install --global --add-source .\downloads AgentForge.TokenBudget.Cli --version 1.3.0-preview.1
 # If a prior version is already installed, use 'dotnet tool update' with the same options instead.
 agentforge setup
 ```
@@ -34,6 +34,12 @@ The installer creates `.github/agents/agentforge.agent.md` and `.vscode/mcp.json
 4. In Copilot Chat, choose the **Copilot** harness and select **AgentForge** from the custom-agent picker. Start the `agentforge` MCP server if prompted and review the workspace/MCP trust request. Enter your task in ordinary language; there are no budget switches to type on each request.
 
 5. Expand the tool call and confirm it was **AgentForge → preflight_task**, not an answer invented by the language model. The tool output should contain token P10/P50/P90, a provider budget decision and prompt-scope guidance. [VS Code documents this verification process](https://code.visualstudio.com/docs/agent-customization/mcp-servers).
+
+## Optional real-account check
+
+After `agentforge setup`, run `agentforge copilot status` in the terminal. Confirm **yes** only if you want a live SDK request for model pricing and account quota information. No model is called to answer a prompt; AgentForge does not submit a task or start a session.
+
+This command uses the account *label* and model from setup; it does not establish that the label matches the SDK-authenticated user. The SDK may expose premium-interaction quotas while the actual AI-credit balance remains unavailable. Saved allowances and used credits retain the time you entered them. Stale or missing timestamps do not silently become fresh. Declining consent makes no SDK calls.
 
 ## Security and accounting
 
