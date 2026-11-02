@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="../TokenBudget.Billing/TokenBudget.Billing.csproj" />
+    <PackageReference Include="GitHub.Copilot.SDK" />
+  </ItemGroup>
+</Project>

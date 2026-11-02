@@ -1,0 +1,23 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/TokenBudget.Domain/TokenBudget.Domain.csproj" />
+    <Project Path="src/TokenBudget.Application/TokenBudget.Application.csproj" />
+    <Project Path="src/TokenBudget.Provider.Codex/TokenBudget.Provider.Codex.csproj" />
+    <Project Path="src/TokenBudget.Billing/TokenBudget.Billing.csproj" />
+    <Project Path="src/TokenBudget.Provider.Copilot/TokenBudget.Provider.Copilot.csproj" />
+    <Project Path="src/TokenBudget.Cli/TokenBudget.Cli.csproj" />
+    <Project Path="src/TokenBudget.Api/TokenBudget.Api.csproj" />
+    <Project Path="src/TokenBudget.Agent/TokenBudget.Agent.csproj" />
+    <Project Path="src/TokenBudget.Agent.Cli/TokenBudget.Agent.Cli.csproj" />
+    <Project Path="src/TokenBudget.Telemetry/TokenBudget.Telemetry.csproj" />
+    <Project Path="src/TokenBudget.Mcp/TokenBudget.Mcp.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/TokenBudget.Tests/TokenBudget.Tests.csproj" />
+    <Project Path="tests/TokenBudget.Agent.Tests/TokenBudget.Agent.Tests.csproj" />
+    <Project Path="tests/TokenBudget.Telemetry.Tests/TokenBudget.Telemetry.Tests.csproj" />
+    <Project Path="tests/TokenBudget.Mcp.Tests/TokenBudget.Mcp.Tests.csproj" />
+    <Project Path="tests/TokenBudget.Cli.Tests/TokenBudget.Cli.Tests.csproj" />
+    <Project Path="tests/TokenBudget.Billing.Tests/TokenBudget.Billing.Tests.csproj" />
+  </Folder>
+</Solution>

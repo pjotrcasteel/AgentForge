@@ -1,0 +1,3 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup><ProjectReference Include="../TokenBudget.Domain/TokenBudget.Domain.csproj" /></ItemGroup>
+</Project>

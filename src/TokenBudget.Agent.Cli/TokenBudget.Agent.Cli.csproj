@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../TokenBudget.Agent/TokenBudget.Agent.csproj" />
+  </ItemGroup>
+</Project>

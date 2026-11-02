@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" />
+    <ProjectReference Include="../TokenBudget.Domain/TokenBudget.Domain.csproj" />
+    <ProjectReference Include="../TokenBudget.Provider.Codex/TokenBudget.Provider.Codex.csproj" />
+    <ProjectReference Include="../TokenBudget.Billing/TokenBudget.Billing.csproj" />
+  </ItemGroup>
+</Project>

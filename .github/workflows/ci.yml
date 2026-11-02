@@ -1,0 +1,19 @@
+name: Validate .NET 10
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Restore
+        run: dotnet restore TokenBudget.slnx --disable-parallel -m:1
+      - name: Build
+        run: dotnet build TokenBudget.slnx --no-restore -c Release -m:1
+      - name: Test
+        run: dotnet test TokenBudget.slnx --no-build -c Release -m:1 --verbosity normal

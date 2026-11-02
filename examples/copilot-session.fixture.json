@@ -1,0 +1,29 @@
+{
+  "observation": {
+    "account": { "provider": "GitHubCopilot", "accountId": "pjotr-personal" },
+    "sessionId": "synthetic-session-01",
+    "usage": {
+      "inputTokens": 800,
+      "outputTokens": 200,
+      "cachedInputTokens": 100,
+      "cacheWriteInputTokens": null,
+      "reasoningOutputTokens": 50
+    },
+    "aiCredits": 8,
+    "premiumRequests": null,
+    "observedAt": "2026-11-02T08:00:00Z",
+    "source": "synthetic-cumulative-session-fixture",
+    "models": ["configured-copilot-model"],
+    "isCumulative": true,
+    "creditsVerified": false
+  },
+  "completed": true,
+  "match": {
+    "estimateId": "783b01df-8ff0-4b6c-9959-47b5b29f3a8d",
+    "provider": "GitHubCopilot",
+    "modelId": "configured-copilot-model",
+    "forecastTokens": { "p10": 500, "p50": 1000, "p90": 1500 },
+    "forecastCosts": { "p10": 3, "p50": 10, "p90": 20 },
+    "costUnit": "GitHubAiCredits"
+  }
+}
