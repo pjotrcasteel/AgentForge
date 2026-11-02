@@ -33,6 +33,21 @@ internal static class CopilotProbeCommand
             DateTimeOffset now = DateTimeOffset.UtcNow;
             BudgetSnapshot? reported = ParseAccountReportedBalance(options, account, now);
 
+            return await RunLiveAsync(account, modelId, reported);
+        }
+        catch (Exception exception) when (exception is ArgumentException or IOException or UnauthorizedAccessException or
+            OverflowException or FormatException)
+        {
+            Console.Error.WriteLine("TokenBudget: " + exception.Message);
+            return 1;
+        }
+    }
+
+    /// <summary>Perform the explicitly authorized, session-free SDK account lookup.</summary>
+    internal static async Task<int> RunLiveAsync(ProviderAccount account, string modelId, BudgetSnapshot? reported)
+    {
+        try
+        {
             await using var client = new CopilotClient();
             bool started = false;
             try
@@ -41,7 +56,7 @@ internal static class CopilotProbeCommand
                 started = true;
                 var probe = new CopilotBillingProbeService(
                     new CopilotSdkPricingProvider(client), new CopilotSdkQuotaProvider(client));
-                CopilotBillingProbeReport report = await probe.ProbeAsync(account, modelId, now, reported);
+                CopilotBillingProbeReport report = await probe.ProbeAsync(account, modelId, DateTimeOffset.UtcNow, reported);
                 Console.WriteLine(JsonSerializer.Serialize(report, JsonOptions));
                 bool noPricing = report.ModelPriceState is CopilotProbeState.Failed or CopilotProbeState.Unavailable;
                 bool noQuota = report.PremiumQuotaState is CopilotProbeState.Failed or CopilotProbeState.Unavailable;
@@ -61,12 +76,6 @@ internal static class CopilotProbeCommand
                     }
                 }
             }
-        }
-        catch (Exception exception) when (exception is ArgumentException or IOException or UnauthorizedAccessException or
-            OverflowException or FormatException)
-        {
-            Console.Error.WriteLine("TokenBudget: " + exception.Message);
-            return 1;
         }
         catch (Exception exception) when (exception is not OperationCanceledException)
         {
