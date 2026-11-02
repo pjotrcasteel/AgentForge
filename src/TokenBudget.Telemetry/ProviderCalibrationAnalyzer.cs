@@ -1,4 +1,4 @@
-﻿using TokenBudget.Billing;
+using TokenBudget.Billing;
 using TokenBudget.Domain;
 
 namespace TokenBudget.Telemetry;

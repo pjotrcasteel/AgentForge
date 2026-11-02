@@ -1,4 +1,4 @@
-﻿using TokenBudget.Cli.Commands;
+using TokenBudget.Cli.Commands;
 using TokenBudget.Domain;
 
 namespace TokenBudget.Cli;
@@ -22,6 +22,8 @@ internal static class CliApplication
         return args[0].ToLowerInvariant() switch
         {
             "setup" => SetupCommand.RunAsync(),
+            "mcp" when args.Length == 1 => AgentForgeMcpServer.RunAsync(),
+            "vscode" => VsCodeIntegrationCommand.RunAsync(args),
             "preflight" or "check" => QuickPreflightCommand.RunAsync(args),
             "analyze" => AnalyzeCommand.RunAsync(args),
             "budget" => ProviderBudgetCommand.RunAsync(args),
@@ -60,17 +62,19 @@ internal static class CliApplication
     private static void PrintHelp()
     {
         Console.WriteLine("""
-            AgentForge TokenBudget v1.0 - one-command AI task preflight
+            AgentForge TokenBudget v1.1 preview - one-command AI task preflight
 
             Commands:
               agentforge                               Enter a prompt interactively
               agentforge "Refactor the lighting engine"  Assess a task immediately
               agentforge setup                         Configure defaults once; no credentials stored
+              agentforge vscode init                   Add Copilot agent and MCP server to this workspace
               agentforge preflight "Refactor the lighting engine"
               agentforge preflight <plan.md>           Read an existing prompt file
               agentforge preflight                     Enter a prompt interactively
 
             Advanced commands:
+              agentforge mcp                           Start read-only stdio MCP server (used by VS Code)
               tokenbudget analyze <plan.md> --model <model-id> [options]
               tokenbudget budget <plan.md> --provider copilot|openai|anthropic|codex|chatgpt
                   --model <model-id> --account <account-label> [billing options]

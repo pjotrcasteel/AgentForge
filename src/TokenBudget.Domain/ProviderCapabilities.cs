@@ -1,4 +1,4 @@
-﻿namespace TokenBudget.Domain;
+namespace TokenBudget.Domain;
 
 /// <summary>Implemented capability state, not a declaration of what upstream APIs theoretically support.</summary>
 public sealed record ProviderCapability(

@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TokenBudget.Telemetry;
 
 namespace TokenBudget.Telemetry.Tests;

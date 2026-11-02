@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using TokenBudget.Provider.Codex;
 
 namespace TokenBudget.Cli.Commands;

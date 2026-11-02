@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TokenBudget.Application;
 using TokenBudget.Domain;

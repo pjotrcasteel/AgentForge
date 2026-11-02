@@ -1,4 +1,4 @@
-﻿namespace TokenBudget.Domain;
+namespace TokenBudget.Domain;
 
 /// <summary>Parses a plan into a dependency graph.</summary>
 public interface IPlanAnalyzer

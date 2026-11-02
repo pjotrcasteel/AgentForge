@@ -1,4 +1,4 @@
-﻿namespace TokenBudget.Domain;
+namespace TokenBudget.Domain;
 
 /// <summary>Provider environment for a plan estimate.</summary>
 public enum ExecutionTarget

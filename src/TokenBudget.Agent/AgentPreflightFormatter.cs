@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using TokenBudget.Application;
 
 namespace TokenBudget.Agent;

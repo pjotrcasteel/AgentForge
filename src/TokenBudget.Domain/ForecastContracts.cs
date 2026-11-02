@@ -1,4 +1,4 @@
-﻿namespace TokenBudget.Domain;
+namespace TokenBudget.Domain;
 
 /// <summary>Estimated P10, P50 and P90 token totals.</summary>
 public sealed record TokenRange(long P10, long P50, long P90);

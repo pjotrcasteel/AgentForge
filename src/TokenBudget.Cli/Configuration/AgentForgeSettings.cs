@@ -1,4 +1,4 @@
-﻿using TokenBudget.Billing;
+using TokenBudget.Billing;
 
 namespace TokenBudget.Cli.Configuration;
 
