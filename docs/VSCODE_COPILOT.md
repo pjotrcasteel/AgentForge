@@ -6,7 +6,7 @@ In the normal workflow, you select **AgentForge** from the Copilot agent picker 
 
 > Refactor the lighting engine
 
-Copilot calls AgentForge's `PreflightTask(prompt)` MCP tool to obtain a deterministic token forecast, budget decision, prompt-scope advice and a suggested narrower prompt. **The task is not executed.** Switch back to your implementation agent only after you review the findings.
+Copilot calls AgentForge's `preflight_task(prompt)` MCP tool to obtain a deterministic token forecast, budget decision, prompt-scope advice and a suggested narrower prompt. **The task is not executed.** Switch back to your implementation agent only after you review the findings.
 
 ## One-time Windows setup
 
@@ -31,7 +31,7 @@ The installer creates `.github/agents/agentforge.agent.md` and `.vscode/mcp.json
 
 4. In Copilot Chat, choose the **Copilot** harness and select **AgentForge** from the custom-agent picker. Start the `agentforge` MCP server if prompted and review the workspace/MCP trust request. Enter your task in ordinary language; there are no budget switches to type on each request.
 
-5. Expand the tool call and confirm it was **AgentForge → PreflightTask**, not an answer invented by the language model. The tool output should contain token P10/P50/P90, a provider budget decision and prompt-scope guidance. [VS Code documents this verification process](https://code.visualstudio.com/docs/agent-customization/mcp-servers).
+5. Expand the tool call and confirm it was **AgentForge → preflight_task**, not an answer invented by the language model. The tool output should contain token P10/P50/P90, a provider budget decision and prompt-scope guidance. [VS Code documents this verification process](https://code.visualstudio.com/docs/agent-customization/mcp-servers).
 
 ## Security and accounting
 
