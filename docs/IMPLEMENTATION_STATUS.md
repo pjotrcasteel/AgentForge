@@ -1,10 +1,12 @@
 # Implementation status — 2026-11-02 (v1.0 preview verified locally)
 
-## GitHub publication preparation — 2026-11-02
+## GitHub publication — 2026-11-02
 
 - Added a static AgentForge landing page at `docs/index.html`, with explicit uncalibrated-forecast and billing-unknown notices.
 - Added `.github/workflows/pages.yml` for GitHub Pages from the `docs/` directory on `main`; retained the existing .NET 10 CI workflow.
-- The intended public `pjotrcasteel/AgentForge` repository has **not yet been created**. GitHub account authentication and two-factor verification are required before remote publication. No repository, Pages deployment, or live CI result is claimed here.
+- The public [`pjotrcasteel/AgentForge`](https://github.com/pjotrcasteel/AgentForge) repository now exists, with the complete v1.0-preview source on `main` (initial source commit `c745965`). GitHub verified the remote README, source project, tests and Pages workflow.
+- The initial Pages workflow failed because Pages has not yet been enabled under repository **Settings → Pages**. Choose **GitHub Actions** there, then rerun the Pages workflow or push a documentation update. The website is **not yet claimed to be live**.
+- A GitHub Actions `.NET 10` validation run was triggered by the source publication; its result must be checked separately before calling the newly published revision CI-verified.
 - This documentation/website addition has not been rebuilt or retested in the current environment, which lacks the .NET 10 SDK. The 17-project/183-test figures below refer to the previously verified v1.0 source release.
 
 ## Provider-aware budgeting roadmap (v0.6–v1.1)
