@@ -6,9 +6,11 @@ and makes no modifications to a repository.
 """
 
 import json
+import os
 import queue
 import subprocess
 import sys
+import tempfile
 import threading
 from pathlib import Path
 
@@ -88,6 +90,27 @@ def main() -> None:
         except subprocess.TimeoutExpired:
             process.kill()
             process.wait(timeout=5)
+
+    # The installed CLI must route the new doctor command, report missing
+    # configuration conservatively, and avoid creating a settings file.
+    with tempfile.TemporaryDirectory(prefix="agentforge-doctor-") as workspace:
+        settings = Path(workspace) / "preferences.json"
+        environment = os.environ.copy()
+        environment["AGENTFORGE_CONFIG_PATH"] = str(settings)
+        doctor = subprocess.run(
+            [str(executable), "doctor"],
+            cwd=workspace,
+            env=environment,
+            capture_output=True,
+            text=True,
+            timeout=15,
+            check=False,
+        )
+        assert doctor.returncode == 2, doctor.stdout + doctor.stderr
+        assert "Readiness: ACTION REQUIRED" in doctor.stdout, doctor.stdout
+        assert "agentforge vscode init" in doctor.stdout, doctor.stdout
+        assert not settings.exists(), "Doctor must never save configuration"
+        print("CLI smoke passed: read-only doctor reports missing setup.")
 
 
 if __name__ == "__main__":

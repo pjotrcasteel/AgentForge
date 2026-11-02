@@ -33,9 +33,14 @@ internal static class VsCodeIntegrationCommand
 
     public static Task<int> RunAsync(string[] args)
     {
+        if (args.Length == 2 && string.Equals(args[1], "doctor", StringComparison.OrdinalIgnoreCase))
+        {
+            return VsCodeDoctorCommand.RunAsync();
+        }
+
         if (args.Length != 2 || !string.Equals(args[1], "init", StringComparison.OrdinalIgnoreCase))
         {
-            Console.Error.WriteLine("Use: agentforge vscode init (run from your VS Code repository root).");
+            Console.Error.WriteLine("Use: agentforge vscode init | agentforge vscode doctor (from the workspace root).");
             return Task.FromResult(1);
         }
 
@@ -89,6 +94,7 @@ internal static class VsCodeIntegrationCommand
             await output.WriteLineAsync("VS Code: trust your workspace, start the agentforge MCP server, select AgentForge in Copilot Chat.");
             await output.WriteLineAsync("Example: Refactor the lighting engine");
             await output.WriteLineAsync("The MCP configuration requires the 'agentforge' .NET tool on PATH.");
+            await output.WriteLineAsync("Next: agentforge doctor");
             return 0;
         }
         catch (Exception exception) when (exception is ArgumentException or IOException or

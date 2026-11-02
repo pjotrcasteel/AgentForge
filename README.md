@@ -2,7 +2,7 @@
 
 A **read-only, provider-neutral .NET 10 token-budget preflight** for AI coding plans and agent workflows.
 
-**Development status (v1.1 preview, November 2, 2026):** an easy-to-use `agentforge` .NET 10 tool, backed by provider-aware forecasting, account-isolated usage reconciliation, conservative calibration diagnostics, and a consent-gated Copilot SDK account probe. The VS Code Copilot custom-agent and MCP integration is implemented; Windows CI verified the installed tool's `initialize`, `tools/list`, and `preflight_task` call, with **17 Release projects, zero warnings and 191 passing tests**. First use inside an actual signed-in VS Code Copilot session and authenticated account billing verification remain pending. See [VS Code Copilot integration](docs/VSCODE_COPILOT.md), [v1.0 release notes](docs/RELEASE_v1.0.md), [provider-aware billing](docs/PROVIDER_BUDGETS.md), and [session reconciliation](docs/SESSION_RECONCILIATION.md). Forecasts remain advisory: no real completed-agent calibration dataset is available.
+**Development status (v1.2 preview, November 2, 2026):** an easy-to-use `agentforge` .NET 10 tool, backed by provider-aware forecasting, account-isolated usage reconciliation, conservative calibration diagnostics, and a consent-gated Copilot SDK account probe. VS Code Copilot's custom agent and MCP integration passed installed-tool protocol verification in Windows CI (v1.1: **17 projects, zero warnings, 191 tests**). v1.2 adds `agentforge doctor`, a read-only workspace/model/PATH/credit-preference health check, with new tests awaiting CI verification. First use inside a signed-in VS Code Copilot session and authenticated account billing verification remain pending. See [VS Code Copilot integration](docs/VSCODE_COPILOT.md), [v1.0 release notes](docs/RELEASE_v1.0.md), [provider-aware billing](docs/PROVIDER_BUDGETS.md), and [session reconciliation](docs/SESSION_RECONCILIATION.md). Forecasts remain advisory: no real completed-agent calibration dataset is available.
 
 ## Quick start — one task, no long argument list
 
@@ -27,7 +27,7 @@ dotnet run --project .\src\TokenBudget.Cli -- preflight .\examples\wyrmforge-g6-
 For the shortest commands, install the v1.0 preview NuGet **tool package supplied with the release** from the directory containing its `.nupkg` (not yet published to NuGet.org):
 
 ```powershell
-dotnet tool install --global --add-source .\downloads AgentForge.TokenBudget.Cli --version 1.1.0-preview.1
+dotnet tool install --global --add-source .\downloads AgentForge.TokenBudget.Cli --version 1.2.0-preview.1
 agentforge setup
 agentforge "Refactor the lighting engine"
 agentforge preflight .\examples\wyrmforge-g6-budget-plan.md
