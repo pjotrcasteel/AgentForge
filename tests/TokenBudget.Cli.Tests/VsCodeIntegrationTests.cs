@@ -30,7 +30,7 @@ public sealed class VsCodeIntegrationTests
                 TestContext.CancellationToken);
             StringAssert.Contains(agent, "tools: ['agentforge/*']");
             StringAssert.Contains(agent, "does not edit files");
-            StringAssert.Contains(agent, "PreflightTask");
+            StringAssert.Contains(agent, "preflight_task");
             StringAssert.Contains(output.ToString(), "Copilot workspace integration is ready");
         });
     }
