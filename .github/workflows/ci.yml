@@ -17,3 +17,11 @@ jobs:
         run: dotnet build TokenBudget.slnx --no-restore -c Release -m:1
       - name: Test
         run: dotnet test TokenBudget.slnx --no-build -c Release -m:1 --verbosity normal
+      - name: Pack AgentForge tool
+        run: dotnet pack src/TokenBudget.Cli/TokenBudget.Cli.csproj --no-build -c Release --output artifacts
+      - name: Upload installable tool
+        uses: actions/upload-artifact@v4
+        with:
+          name: agentforge-dotnet10-tool-preview
+          path: artifacts/*.nupkg
+          if-no-files-found: error

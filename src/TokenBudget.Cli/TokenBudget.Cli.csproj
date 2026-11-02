@@ -4,7 +4,7 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>agentforge</ToolCommandName>
     <PackageId>AgentForge.TokenBudget.Cli</PackageId>
-    <Version>1.0.0-preview.1</Version>
+    <Version>1.1.0-preview.1</Version>
     <Authors>AgentForge</Authors>
     <Description>Provider-aware AI engineering prompt and token budget preflight.</Description>
     <!-- Copilot SDK includes dot-prefixed runtime metadata required by its CLI bundle. -->
@@ -12,5 +12,13 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup><None Include="../../README.md" Pack="true" PackagePath="/" /></ItemGroup>
-  <ItemGroup><ProjectReference Include="../TokenBudget.Application/TokenBudget.Application.csproj" /><ProjectReference Include="../TokenBudget.Provider.Codex/TokenBudget.Provider.Codex.csproj" /><ProjectReference Include="../TokenBudget.Telemetry/TokenBudget.Telemetry.csproj" /><ProjectReference Include="../TokenBudget.Provider.Copilot/TokenBudget.Provider.Copilot.csproj" /></ItemGroup>
+  <ItemGroup><EmbeddedResource Include="../../.github/agents/agentforge.agent.md" LogicalName="AgentForge.CopilotAgent" /></ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ModelContextProtocol" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <ProjectReference Include="../TokenBudget.Application/TokenBudget.Application.csproj" />
+    <ProjectReference Include="../TokenBudget.Provider.Codex/TokenBudget.Provider.Codex.csproj" />
+    <ProjectReference Include="../TokenBudget.Telemetry/TokenBudget.Telemetry.csproj" />
+    <ProjectReference Include="../TokenBudget.Provider.Copilot/TokenBudget.Provider.Copilot.csproj" />
+  </ItemGroup>
 </Project>

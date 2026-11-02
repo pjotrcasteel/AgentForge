@@ -16,12 +16,13 @@ internal static partial class QuickPreflightCommand
         AgentForgeSettingsStore.ForCurrentUser(), Console.In, Console.Out, Directory.GetCurrentDirectory());
 
     internal static async Task<int> RunAsync(string[] args, AgentForgeSettingsStore store,
-        TextReader input, TextWriter output, string workingDirectory)
+        TextReader input, TextWriter output, string workingDirectory, bool allowFileInput = true,
+        CancellationToken cancellationToken = default)
     {
         try
         {
-            string prompt = await ReadPromptAsync(args, input, output);
-            AgentForgeSettings settings = await store.LoadAsync();
+            string prompt = await ReadPromptAsync(args, input, output, allowFileInput);
+            AgentForgeSettings settings = await store.LoadAsync(cancellationToken);
             var account = new ProviderAccount(settings.Provider, settings.AccountId);
             ModelPricing? price = null;
             string? pricingWarning = null;
@@ -42,7 +43,8 @@ internal static partial class QuickPreflightCommand
                 new ConfiguredBudgetAdapter(settings.Provider, quota is null ? [] : [quota]),
                 new BudgetPolicyEvaluator(), new PromptScopeAdvisor());
             var assessment = await service.AnalyzeAsync(new ProviderBudgetRequest(request, account,
-                new ProviderBudgetPolicy(MaxAtRiskFraction: 0.5m), new WorkloadAssumptions(), ImprovePrompt: true));
+                new ProviderBudgetPolicy(MaxAtRiskFraction: 0.5m), new WorkloadAssumptions(), ImprovePrompt: true),
+                cancellationToken);
 
             bool underspecified = IsUnderspecified(prompt, assessment.Prompt);
             await WriteReportAsync(output, assessment, underspecified, pricingWarning);
@@ -68,7 +70,8 @@ internal static partial class QuickPreflightCommand
         }
     }
 
-    private static async Task<string> ReadPromptAsync(string[] args, TextReader input, TextWriter output)
+    private static async Task<string> ReadPromptAsync(string[] args, TextReader input, TextWriter output,
+        bool allowFileInput)
     {
         string? candidate;
         if (args.Length >= 2)
@@ -86,7 +89,7 @@ internal static partial class QuickPreflightCommand
             throw new ArgumentException("Provide a task: agentforge preflight \"Refactor the lighting engine\".");
         }
 
-        if (File.Exists(candidate))
+        if (allowFileInput && File.Exists(candidate))
         {
             if (new FileInfo(candidate).Length > 1024 * 1024)
             {
@@ -95,7 +98,7 @@ internal static partial class QuickPreflightCommand
 
             candidate = await File.ReadAllTextAsync(candidate);
         }
-        else if (candidate.EndsWith(".md", StringComparison.OrdinalIgnoreCase) &&
+        else if (allowFileInput && candidate.EndsWith(".md", StringComparison.OrdinalIgnoreCase) &&
             !candidate.Contains('\n') && !candidate.Contains('\r') && !candidate.Contains(' '))
         {
             throw new ArgumentException("The Markdown plan file was not found: " + candidate);
