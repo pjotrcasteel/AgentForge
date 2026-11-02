@@ -1,4 +1,4 @@
-using TokenBudget.Cli.Commands;
+﻿using TokenBudget.Cli.Commands;
 using TokenBudget.Domain;
 
 namespace TokenBudget.Cli;

@@ -1,3 +1,3 @@
-using TokenBudget.Cli;
+﻿using TokenBudget.Cli;
 
 return await CliApplication.RunAsync(args);

@@ -1,4 +1,4 @@
-namespace TokenBudget.Billing;
+﻿namespace TokenBudget.Billing;
 
 /// <summary>User-supplied or externally fetched pricing snapshots; never preloaded with invented rates.</summary>
 public sealed class ConfiguredPricingProvider(BillingProvider provider, IReadOnlyCollection<ModelPricing> prices)

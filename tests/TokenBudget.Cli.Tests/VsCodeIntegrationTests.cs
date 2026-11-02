@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TokenBudget.Cli.Tests;

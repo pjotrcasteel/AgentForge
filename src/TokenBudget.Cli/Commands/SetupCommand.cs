@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 using TokenBudget.Billing;
 using TokenBudget.Cli.Configuration;
 

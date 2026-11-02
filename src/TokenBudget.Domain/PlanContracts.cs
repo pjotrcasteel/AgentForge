@@ -1,4 +1,4 @@
-namespace TokenBudget.Domain;
+﻿namespace TokenBudget.Domain;
 
 /// <summary>Limits and risk tolerance used to evaluate an estimate.</summary>
 public sealed record BudgetConstraints(

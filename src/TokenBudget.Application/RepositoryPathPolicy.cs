@@ -1,4 +1,4 @@
-namespace TokenBudget.Application;
+﻿namespace TokenBudget.Application;
 
 /// <summary>
 /// Restricts repository inspection for remotely supplied paths. CLI callers remain responsible
