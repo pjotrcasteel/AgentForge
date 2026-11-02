@@ -21,7 +21,9 @@ public sealed class SqliteUsageHistoryStore
         {
             DataSource = fullPath,
             Mode = SqliteOpenMode.ReadWriteCreate,
-            Cache = SqliteCacheMode.Private
+            Cache = SqliteCacheMode.Private,
+            // Do not retain a file handle after a metrics-only operation completes (notably on Windows).
+            Pooling = false
         };
         _connectionString = builder.ToString();
     }

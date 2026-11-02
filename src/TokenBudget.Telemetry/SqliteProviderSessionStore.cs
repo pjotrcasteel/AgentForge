@@ -25,7 +25,9 @@ public sealed class SqliteProviderSessionStore
         {
             DataSource = path,
             Mode = SqliteOpenMode.ReadWriteCreate,
-            Cache = SqliteCacheMode.Private
+            Cache = SqliteCacheMode.Private,
+            // Each operation owns its connection; pooled handles prevent safe cleanup of local ledgers on Windows.
+            Pooling = false
         };
         _connectionString = builder.ToString();
     }
