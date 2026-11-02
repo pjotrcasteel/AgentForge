@@ -38,13 +38,13 @@ The final command prompts you for a task interactively. `agentforge --help` list
 
 ## GitHub repository and Pages
 
-The intended public repository is **`pjotrcasteel/AgentForge`**, with this .NET solution at its root. The repository includes:
+The public repository is **[pjotrcasteel/AgentForge](https://github.com/pjotrcasteel/AgentForge)**, with this .NET solution at its root. The repository includes:
 
 - `.github/workflows/ci.yml` for Windows .NET 10 Release build and MSTest verification.
 - `.github/workflows/pages.yml` for publishing the static website from `docs/` on `main`.
 - `docs/index.html` for the responsive AgentForge introduction and CLI quick start.
 
-Once the public repository has been created and the source pushed, choose **GitHub Actions** as the Pages deployment source in the repository settings. The Pages workflow then publishes the site on changes to `docs/`. The site describes the estimator; it does **not** run estimation in the browser or expose the local API to the internet.
+The source is published. To activate the website for the first time, choose **GitHub Actions** as the Pages deployment source under [Settings → Pages](https://github.com/pjotrcasteel/AgentForge/settings/pages). The Pages workflow then publishes the site on changes to `docs/`. The initial Pages run failed because the repository did not yet have Pages enabled; after changing the setting, rerun the Pages workflow or push a documentation update. The site describes the estimator; it does **not** run estimation in the browser or expose the local API to the internet.
 
 These workflow files do not grant AgentForge permission to access credentials or run provider-paid AI tasks. The main application remains offline-by-default.
 
