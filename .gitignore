@@ -1,0 +1,14 @@
+**/bin/
+**/obj/
+.vs/
+TestResults/
+*.user
+*.suo
+*.trx
+.DS_Store
+
+# Local token-usage observations; may contain project identifiers
+local-data/
+*.db
+*.db-shm
+*.db-wal
