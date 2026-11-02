@@ -1,4 +1,12 @@
-# Implementation status — 2026-11-02 (v1.2 preview verified in Windows CI)
+# Implementation status — 2026-11-02 (v1.3 preview in CI; v1.2 verified)
+
+## v1.3 Opt-in Copilot account status — 2026-11-02
+
+- Added `agentforge copilot status`, a single-command, consent-gated SDK lookup using saved GitHub Copilot account and model preferences.
+- The interactive confirmation is mandatory for every invocation, even when model pricing lookups were enabled during setup. Declining never launches the SDK.
+- Saved user-reported AI-credit balances retain their original timestamps. Missing observation time is treated as stale, never relabeled as a fresh or SDK-verified balance.
+- The command reports dynamic model pricing and separately typed quota observations when available; premium interactions are not converted into AI credits. No prompts or sessions are submitted.
+- Six new offline MSTest scenarios cover consent denial, saved preferences, stale and absent timestamps, missing balances, wrong providers and unconfigured settings. **Windows CI verification pending.**
 
 ## v1.2 VS Code onboarding diagnostics — 2026-11-02
 
@@ -39,7 +47,7 @@
 | v1.0 Easy one-task CLI | P0 | `agentforge setup` once, then `agentforge "task"` or `agentforge preflight plan.md`; .NET tool install; preserve advanced CLI and consent/unknown states | Implemented; offline tool smoke verified |
 | v1.1 VS Code Copilot preflight | P0 | Official custom agent and MCP server via `agentforge mcp`; one-command workspace setup; strict no-execution tool boundary | Implemented; installed MCP protocol verified in CI; VS Code user acceptance pending |
 | v1.1 Ease-of-install and actual account acceptance | P1 | Packaged .NET tool from CI; authenticated Copilot principal verification; safe pricing and quota reset checks | Tool packaged and installed in CI; account approval required |
-| v1.2 Onboarding diagnostics | P0 | Single-command readiness check with actionable fixes, no secrets or provider calls | Merged; installed-tool smoke and 200 tests passed in CI |
+| v1.3 Copilot account status | P0 | One command using saved preferences, explicit live lookup consent, original credit timestamp and partial/unknown billing states | Implemented; CI verification pending and authenticated acceptance still required |\n| v1.2 Onboarding diagnostics | P0 | Single-command readiness check with actionable fixes, no secrets or provider calls | Merged; installed-tool smoke and 200 tests passed in CI |
 | v0.10 Controlled calibration | P2 | Real-run quality checks and separately approved statistical adjustment, only after authenticated provider acceptance | Planned; live evidence required |
 
 The v0.5 baseline was reverified before edits on 2026-11-02: **14/14 projects built in Release, zero warnings/errors, 69/69 MSTest cases passed**. No live Copilot account or SDK credentials have been supplied. Token usage, model prices, provider account quota, USD charges, and AI credits are distinct quantities; missing quota data does not mean zero balance. An optional AI reviewer cannot override deterministic policy or consent gates.
